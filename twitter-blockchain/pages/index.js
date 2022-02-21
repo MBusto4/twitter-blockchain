@@ -1,6 +1,7 @@
 
 import Head from 'next/head'
 import Image from 'next/image'
+import SideBar from '../components/SideBar'
 
 const style = {
   wrapper: `flex justify-center h-screen w-screen select-none bg-[#15202b] text-white`,
@@ -15,7 +16,7 @@ const Home = () => {
     <div className={style.wrapper}>
       <div className={style.content}>
         {/* Side Bar */}
-        <h2>Sidebar</h2>
+        <SideBar />
         {/* Feed */}
         <h2>Feed</h2>
         {/* Widgets */}
