@@ -2,6 +2,9 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import SideBar from '../components/SideBar'
+import Widgets from '../components/Widgets'
+import Feed from '../components/Home/Feed'
+
 
 const style = {
   wrapper: `flex justify-center h-screen w-screen select-none bg-[#15202b] text-white`,
@@ -18,9 +21,9 @@ const Home = () => {
         {/* Side Bar */}
         <SideBar />
         {/* Feed */}
-        <h2>Feed</h2>
+        <Feed />
         {/* Widgets */}
-        <h2>Widgets</h2>
+        <Widgets />
       </div>
     </div>
   )
