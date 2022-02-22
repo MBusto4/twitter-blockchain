@@ -12,6 +12,7 @@ const style = {
 
 
 const SideBarOption = ({ text, Icon, isActive, setSelected, redirect }) => {
+    const router = useRouter()
     // console.log(setSelected)
 
     // const handleClick = (buttonText = text) => {
@@ -29,7 +30,11 @@ const SideBarOption = ({ text, Icon, isActive, setSelected, redirect }) => {
             //         router.push(redirect)
             //     } else return
             // }}
-            onClick={() => setSelected(text)}
+            onClick={() => {
+                setSelected(text)
+                router.push(redirect)
+            }
+            }
         >
             <div className={style.iconContainer}>
                 <Icon />
