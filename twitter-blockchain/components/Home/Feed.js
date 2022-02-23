@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react'
-// import { TwitterContext } from '../../context/TwitterContext'
+import { TwitterContext } from '../../context/TwitterContext'
 import TweetBox from './TweetBox'
 import Post from '../Post'
 import { BsStars } from 'react-icons/bs'
@@ -10,15 +10,17 @@ const style = {
     headerTitle: `text-xl font-bold`,
 }
 
-const Feed = () => {
+function Feed() {
+    const { tweets } = useContext(TwitterContext)
+
     return (
-        <div className={`${style.wrapper}`}>
+        <div className={`${style.wrapper} no-scrollbar`}>
             <div className={style.header}>
                 <div className={style.headerTitle}>Home</div>
                 <BsStars />
             </div>
             <TweetBox />
-            {/* {tweets.map((tweet, index) => (
+            {tweets.map((tweet, index) => (
                 <Post
                     key={index}
                     displayName={
@@ -38,7 +40,7 @@ const Feed = () => {
                     isProfileImageNft={tweet.author.isProfileImageNft}
                     timestamp={tweet.timestamp}
                 />
-            ))} */}
+            ))}
         </div>
     )
 }

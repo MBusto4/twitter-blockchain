@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from 'react'
-// import { TwitterContext } from '../../context/TwitterContext'
+import { TwitterContext } from '../../context/TwitterContext'
 import { BsArrowLeftShort } from 'react-icons/bs'
 import { useRouter } from 'next/router'
-// import Modal from 'react-modal'
+import Modal from 'react-modal'
 // import ProfileImageMinter from './mintingModal/ProfileImageMinter'
-// import { customStyles } from '../../lib/constants'
+import { customStyles } from '../../lib/constants'
+
+Modal.setAppElement('#__next')
 
 const style = {
     wrapper: `border-[#38444d] border-b`,
@@ -24,9 +26,30 @@ const style = {
 }
 
 const ProfileHeader = () => {
+    const { currentAccount, currentUser } = useContext(TwitterContext)
     const router = useRouter()
-    const isProfileImageNft = false
-    const currentAccount = '0xc805e7619a06f58Bb91FCEeB91F6dfA44B4bEB8A'
+    const [userData, setUserData] = useState({
+        name: '',
+        profileImage: '',
+        coverImage: '',
+        walletAddress: '',
+        tweets: [],
+        isProfileImageNft: undefined,
+    })
+
+    useEffect(() => {
+        if (!currentUser) return
+
+        setUserData({
+            name: currentUser.name,
+            profileImage: currentUser.profileImage,
+            walletAddress: currentUser.walletAddress,
+            coverImage: currentUser.coverImage,
+            tweets: currentUser.tweets,
+            isProfileImageNft: currentUser.isProfileImageNft,
+        })
+    }, [currentUser])
+
     return (
         <div className={style.wrapper}>
             <div className={style.header}>
@@ -34,30 +57,36 @@ const ProfileHeader = () => {
                     <BsArrowLeftShort />
                 </div>
                 <div className={style.details}>
-                    {/* <div className={style.primary}>{userData.name}</div>
+                    <div className={style.primary}>{userData.name}</div>
                     <div className={style.secondary}>
                         {userData.tweets?.length} Tweets
-                    </div> */}
-                    <div className={style.primary}>Mbusto4</div>
-                    <div className={style.secondary}>
-                        4 Tweets
                     </div>
                 </div>
             </div>
             <div className={style.coverPhotoContainer}>
-                {/* <img
-                    src={userData.coverImage}
-                    alt='cover'
-                    className={style.coverPhoto}
-                /> */}
+                {
+                    userData.coverImage ? (
+                        <img
+                            src={userData.coverImage}
+                            alt='cover'
+                            className={style.coverPhoto}
+                        />
+                    ) : (
+                        <img
+                            src='https://d25yuvogekh0nj.cloudfront.net/2019/08/Twitter-Banner-Size-Guide-blog-banner-1250x500.png'
+                            alt='cover'
+                            className={style.coverPhoto}
+                        />
+                    )
+                }
             </div>
             <div className={style.profileImageContainer}>
                 <div
-                // className={
-                //     currentUser.isProfileImageNft ? 'hex' : style.profileImageContainer
-                // }
+                    className={
+                        currentUser.isProfileImageNft ? 'hex' : style.profileImageContainer
+                    }
                 >
-                    {/* <img
+                    <img
                         src={userData.profileImage}
                         alt={userData.walletAddress}
                         className={
@@ -65,13 +94,12 @@ const ProfileHeader = () => {
                                 ? style.profileImageNft
                                 : style.profileImage
                         }
-                    /> */}
+                    />
                 </div>
             </div>
             <div className={style.details}>
                 <div>
-                    {/* <div className={style.primary}>{currentUser.name}</div> */}
-                    <div className={style.primary}>Mbusto4</div>
+                    <div className={style.primary}>{currentUser.name}</div>
                 </div>
                 <div className={style.secondary}>
                     {currentAccount && (
