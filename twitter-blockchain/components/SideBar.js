@@ -11,7 +11,7 @@ import { CgMoreO } from 'react-icons/cg'
 import { VscTwitter } from 'react-icons/vsc'
 import Modal from 'react-modal'
 import { customStyles } from '../lib/constants'
-// import ProfileImageMinter from './profile/mintingModal/ProfileImageMinter'
+import ProfileImageMinter from './profile/minitingModal/ProfileImageMinter'
 import {
     BsBookmark,
     BsBookmarkFill,
@@ -125,13 +125,13 @@ function SideBar({ initialSelectedIcon }) {
                 </div>
             </div>
 
-            {/* <Modal
+            <Modal
                 isOpen={Boolean(router.query.mint)}
                 onRequestClose={() => router.back()}
                 style={customStyles}
             >
                 <ProfileImageMinter />
-            </Modal> */}
+            </Modal>
         </div>
     )
 }
